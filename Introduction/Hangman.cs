@@ -10,8 +10,11 @@ namespace Introduction
     public class Hangman
     {
         private string word;
+        private int wrongGuesses;
 
         public string Hint { get { return Regex.Replace(word, ".", "_"); } }
+
+        public int WrongGuesses { get { return wrongGuesses; } }
 
         public Hangman(string word)
         {
@@ -26,6 +29,11 @@ namespace Introduction
         static void Main()
         {
 
+        }
+
+        public void Guess(char notInWord)
+        {
+            wrongGuesses++;
         }
     }
 }

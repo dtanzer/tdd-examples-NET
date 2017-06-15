@@ -22,5 +22,19 @@ namespace Introduction.Tests
             string expected = Regex.Replace(word, ".", "_");
             Assert.AreEqual(expected, hangman.Hint);
         }
+
+        [TestMethod()]
+        public void IncrementsNumberOfWrongGuessesWhenGuessedLetterIsNotInWord()
+        {
+            string word = "a";
+            char notInWord = 'b';
+
+            Hangman hangman = new Hangman(word);
+            int wrongGuessesBefore = hangman.WrongGuesses;
+
+            hangman.Guess(notInWord);
+
+            Assert.AreEqual(wrongGuessesBefore + 1, hangman.WrongGuesses);
+        }
     }
 }
