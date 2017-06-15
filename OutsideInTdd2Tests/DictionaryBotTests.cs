@@ -51,5 +51,49 @@ namespace OutsideInTdd2.Tests
             analyzerMock.Verify(analyzer => analyzer.NextSuggestion(
                 It.IsAny<List<string>>(), It.Is<string>(s => s.Equals("_sug__"))));
         }
+
+        [TestMethod()]
+        public void PassesKnownWordsToDictionaryAnalyzerOnFirstRun()
+        {
+            var hangmanMock = new Mock<Hangman>();
+            hangmanMock.SetupGet(hangman => hangman.Hint).Returns("_sug__");
+            var analyzerMock = new Mock<DictionaryAnalyzer>();
+            analyzerMock.Setup(analyzer => analyzer.NextSuggestion(It.IsAny<List<string>>(), It.IsAny<string>()))
+                .Returns(new DictionaryAnalyzer.Suggestion()
+                {
+                    BestGuess = 'i',
+                    RemainingWords = new List<string> { }
+                });
+
+            var knownWords = new List<string> { "abc", "defg" };
+            DictionaryBot bot = new DictionaryBot(hangmanMock.Object, analyzerMock.Object, knownWords);
+            bot.NextMove();
+
+            analyzerMock.Verify(analyzer => analyzer.NextSuggestion(
+                It.Is<List<string>>(l => l == knownWords), It.IsAny<string>()));
+        }
+
+        [TestMethod()]
+        public void PassesRemainingWordsFromLastSuggestionToToDictionaryAnalyzer()
+        {
+            var hangmanMock = new Mock<Hangman>();
+            hangmanMock.SetupGet(hangman => hangman.Hint).Returns("_sug__");
+
+            var expectedRemainingWords = new List<string> { "abc" };
+            var analyzerMock = new Mock<DictionaryAnalyzer>();
+            analyzerMock.Setup(analyzer => analyzer.NextSuggestion(It.IsAny<List<string>>(), It.IsAny<string>()))
+                .Returns(new DictionaryAnalyzer.Suggestion()
+                {
+                    BestGuess = 'i',
+                    RemainingWords = expectedRemainingWords
+                });
+
+            DictionaryBot bot = new DictionaryBot(hangmanMock.Object, analyzerMock.Object, new List<string> { });
+            bot.NextMove();
+            bot.NextMove();
+
+            analyzerMock.Verify(analyzer => analyzer.NextSuggestion(
+                It.Is<List<string>>(l => l == expectedRemainingWords), It.IsAny<string>()));
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace OutsideInTdd2
         private Hangman hangman;
         private DictionaryAnalyzer analyzer;
         private List<string> knownWords;
+        private DictionaryAnalyzer.Suggestion lastSuggestion;
 
         public DictionaryBot(Hangman hangman, DictionaryAnalyzer analyzer, List<string> knownWords)
         {
@@ -26,8 +27,13 @@ namespace OutsideInTdd2
         public void NextMove()
         {
             string hint = hangman.Hint;
-            var suggestion = analyzer.NextSuggestion(null, hint);
-            hangman.Guess(suggestion.BestGuess);
+            var remainingWords = knownWords;
+            if(this.lastSuggestion != null)
+            {
+                remainingWords = lastSuggestion.RemainingWords;
+            }
+            this.lastSuggestion = analyzer.NextSuggestion(remainingWords, hint);
+            hangman.Guess(this.lastSuggestion.BestGuess);
         }
     }
 }
