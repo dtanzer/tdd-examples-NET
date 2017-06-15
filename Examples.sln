@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Introduction", "Introductio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntroductionTests", "IntroductionTests\IntroductionTests.csproj", "{DCAA6409-271B-4771-B561-F4131FCE740A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartWithRuleSet", "StartWithRuleSet\StartWithRuleSet.csproj", "{2147321F-792D-48C0-84C7-F52E39ACB3A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartWithRuleSetTests", "StartWithRuleSetTests\StartWithRuleSetTests.csproj", "{0F82DB45-193F-4801-B32A-BC54875689B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{DCAA6409-271B-4771-B561-F4131FCE740A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCAA6409-271B-4771-B561-F4131FCE740A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCAA6409-271B-4771-B561-F4131FCE740A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2147321F-792D-48C0-84C7-F52E39ACB3A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2147321F-792D-48C0-84C7-F52E39ACB3A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2147321F-792D-48C0-84C7-F52E39ACB3A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2147321F-792D-48C0-84C7-F52E39ACB3A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F82DB45-193F-4801-B32A-BC54875689B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F82DB45-193F-4801-B32A-BC54875689B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F82DB45-193F-4801-B32A-BC54875689B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F82DB45-193F-4801-B32A-BC54875689B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
