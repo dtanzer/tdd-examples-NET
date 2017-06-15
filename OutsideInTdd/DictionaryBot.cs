@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OutsideInTdd
 {
-    public class SimpleBot
+    public class DictionaryBot
     {
         public static void Main(string[] args)
         {

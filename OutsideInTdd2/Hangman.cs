@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace OutsideInTdd2
 {
-    public class SimpleBot
+    public class Hangman
     {
-        public static void Main(string[] args)
+        public virtual void Guess(char guess)
         {
+            throw new NotImplementedException();
         }
     }
 }
