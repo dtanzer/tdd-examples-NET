@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Introduction.Tests
 {
@@ -12,9 +13,14 @@ namespace Introduction.Tests
     public class HangmanTests
     {
         [TestMethod()]
-        public void FooTest()
+        public void ShowsUnderscoreForEachLetterInWordOnStart()
         {
-            Assert.Fail();
+            string word = "some test word";
+
+            Hangman hangman = new Hangman(word);
+
+            string expected = Regex.Replace(word, ".", "_");
+            Assert.AreEqual(expected, hangman.Hint);
         }
     }
 }
