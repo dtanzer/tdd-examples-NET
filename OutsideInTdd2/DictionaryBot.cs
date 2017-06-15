@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OutsideInTdd
+namespace OutsideInTdd2
 {
-    public class SimpleBot
+    public class DictionaryBot
     {
         public static void Main(string[] args)
         {

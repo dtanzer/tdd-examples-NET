@@ -12,6 +12,7 @@ namespace Introduction.Tests
     public class HangmanTests
     {
         [TestMethod()]
+        [Ignore]
         public void FooTest()
         {
             Assert.Fail();
