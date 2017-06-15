@@ -25,7 +25,8 @@ namespace OutsideInTdd2
 
         public void NextMove()
         {
-            var suggestion = analyzer.NextSuggestion(null, null);
+            string hint = hangman.Hint;
+            var suggestion = analyzer.NextSuggestion(null, hint);
             hangman.Guess(suggestion.BestGuess);
         }
     }

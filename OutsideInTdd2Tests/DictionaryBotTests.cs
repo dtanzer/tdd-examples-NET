@@ -31,5 +31,25 @@ namespace OutsideInTdd2.Tests
 
             hangmanMock.Verify(hangman => hangman.Guess(expectedGuess));
         }
+
+        [TestMethod()]
+        public void PassesHintFromHangmanToDictionaryAnalyzer()
+        {
+            var hangmanMock = new Mock<Hangman>();
+            hangmanMock.SetupGet(hangman => hangman.Hint).Returns("_sug__");
+            var analyzerMock = new Mock<DictionaryAnalyzer>();
+            analyzerMock.Setup(analyzer => analyzer.NextSuggestion(It.IsAny<List<string>>(), It.IsAny<string>()))
+                .Returns(new DictionaryAnalyzer.Suggestion()
+                {
+                    BestGuess = 'i',
+                    RemainingWords = new List<string> { }
+                });
+
+            DictionaryBot bot = new DictionaryBot(hangmanMock.Object, analyzerMock.Object, new List<string> { });
+            bot.NextMove();
+
+            analyzerMock.Verify(analyzer => analyzer.NextSuggestion(
+                It.IsAny<List<string>>(), It.Is<string>(s => s.Equals("_sug__"))));
+        }
     }
 }

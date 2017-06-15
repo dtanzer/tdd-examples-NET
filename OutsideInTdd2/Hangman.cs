@@ -8,6 +8,8 @@ namespace OutsideInTdd2
 {
     public class Hangman
     {
+        public virtual string Hint { get; private set; }
+
         public virtual void Guess(char guess)
         {
             throw new NotImplementedException();
