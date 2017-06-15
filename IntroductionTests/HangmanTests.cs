@@ -62,5 +62,19 @@ namespace Introduction.Tests
 
             Assert.AreEqual("_b_b_", hangman.Hint);
         }
+
+        [TestMethod()]
+        public void ShowsAllOccurancesOfAllCorrectlyGuessesLetters()
+        {
+            string word = "abcba";
+            char inWord1 = 'a';
+            char inWord2 = 'b';
+
+            Hangman hangman = new Hangman(word);
+            hangman.Guess(inWord1);
+            hangman.Guess(inWord2);
+
+            Assert.AreEqual("ab_ba", hangman.Hint);
+        }
     }
 }

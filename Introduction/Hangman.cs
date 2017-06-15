@@ -11,9 +11,19 @@ namespace Introduction
     {
         private string word;
         private int wrongGuesses;
-        private char guess;
+        private string guesses = "";
 
-        public string Hint { get { return Regex.Replace(word, "[^"+guess+"]", "_"); } }
+        public string Hint
+        {
+            get
+            {
+                if(guesses == "")
+                {
+                    return Regex.Replace(word, ".", "_");
+                }
+                return Regex.Replace(word, "[^"+guesses+"]", "_");
+            }
+        }
 
         public int WrongGuesses { get { return wrongGuesses; } }
 
@@ -31,7 +41,7 @@ namespace Introduction
         {
             if(word.Contains(guess))
             {
-                this.guess = guess;
+                this.guesses += guess;
             }
             else
             {
