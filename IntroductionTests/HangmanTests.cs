@@ -113,5 +113,18 @@ namespace Introduction.Tests
 
             Assert.AreEqual(Hangman.GameStatus.WON, hangman.Status);
         }
+
+        [TestMethod()]
+        [ExpectedException(typeof(IllegalGuessException), "Illegal guess while game is not running:\"i\".")]
+        public void DoesNotAcceptAnyInputWhenTheGameIsNotRunning()
+        {
+            string word = "a";
+            char inWord = 'a';
+            char illegalGuess = 'i';
+
+            Hangman hangman = new Hangman(word);
+            hangman.Guess(inWord);
+            hangman.Guess(illegalGuess);
+        }
     }
 }

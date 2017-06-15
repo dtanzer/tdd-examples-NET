@@ -50,6 +50,10 @@ namespace Introduction
 
         public void Guess(char guess)
         {
+            if(this.Status != GameStatus.RUNNING)
+            {
+                throw new IllegalGuessException("Illegal guess while game is not running:\"" + guess + "\".");
+            }
             if(word.Contains(guess))
             {
                 this.guesses += guess;
