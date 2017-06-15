@@ -36,5 +36,19 @@ namespace Introduction.Tests
 
             Assert.AreEqual(wrongGuessesBefore + 1, hangman.WrongGuesses);
         }
+
+        [TestMethod()]
+        public void DoesNotIncrementNumberOfWrongGuessesWhenGuessedLetterIsInWord()
+        {
+            string word = "a";
+            char inWord = 'a';
+
+            Hangman hangman = new Hangman(word);
+            int wrongGuessesBefore = hangman.WrongGuesses;
+
+            hangman.Guess(inWord);
+
+            Assert.AreEqual(wrongGuessesBefore, hangman.WrongGuesses);
+        }
     }
 }

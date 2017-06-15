@@ -21,19 +21,21 @@ namespace Introduction
             this.word = word;
         }
 
-        public void Foo()
-        {
-
-        }
-
         static void Main()
         {
 
         }
 
-        public void Guess(char notInWord)
+        public void Guess(char guess)
         {
-            wrongGuesses++;
+            if(word.Contains(guess))
+            {
+
+            }
+            else
+            {
+                wrongGuesses++;
+            }
         }
     }
 }
