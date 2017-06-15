@@ -50,5 +50,17 @@ namespace Introduction.Tests
 
             Assert.AreEqual(wrongGuessesBefore, hangman.WrongGuesses);
         }
+
+        [TestMethod()]
+        public void ShowsAllOccurancesOfLetterOnRightGuess()
+        {
+            string word = "abcba";
+            char inWord = 'b';
+
+            Hangman hangman = new Hangman(word);
+            hangman.Guess(inWord);
+
+            Assert.AreEqual("_b_b_", hangman.Hint);
+        }
     }
 }

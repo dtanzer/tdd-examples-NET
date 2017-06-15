@@ -11,8 +11,9 @@ namespace Introduction
     {
         private string word;
         private int wrongGuesses;
+        private char guess;
 
-        public string Hint { get { return Regex.Replace(word, ".", "_"); } }
+        public string Hint { get { return Regex.Replace(word, "[^"+guess+"]", "_"); } }
 
         public int WrongGuesses { get { return wrongGuesses; } }
 
@@ -30,7 +31,7 @@ namespace Introduction
         {
             if(word.Contains(guess))
             {
-
+                this.guess = guess;
             }
             else
             {
