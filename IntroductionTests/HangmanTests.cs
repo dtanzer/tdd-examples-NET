@@ -76,5 +76,42 @@ namespace Introduction.Tests
 
             Assert.AreEqual("ab_ba", hangman.Hint);
         }
+
+        [TestMethod()]
+        public void GameStatusIsRunningWhenTheGameStarts()
+        {
+            string word = "a";
+
+            Hangman hangman = new Hangman(word);
+
+            Assert.AreEqual(Hangman.GameStatus.RUNNING, hangman.Status);
+        }
+
+        [TestMethod()]
+        public void GameStatusIsLostAfterEleventhWrongGuess()
+        {
+            string word = "a";
+            char notInWord = 'b';
+
+            Hangman hangman = new Hangman(word);
+            for(int i=0; i<11; i++)
+            {
+                hangman.Guess(notInWord);
+            }
+
+            Assert.AreEqual(Hangman.GameStatus.LOST, hangman.Status);
+        }
+
+        [TestMethod()]
+        public void GameIsWonWhenLastRemainingLetterWasGuessedCorrectly()
+        {
+            string word = "a";
+            char inWord = 'a';
+
+            Hangman hangman = new Hangman(word);
+            hangman.Guess(inWord);
+
+            Assert.AreEqual(Hangman.GameStatus.WON, hangman.Status);
+        }
     }
 }

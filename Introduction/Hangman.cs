@@ -13,6 +13,14 @@ namespace Introduction
         private int wrongGuesses;
         private string guesses = "";
 
+        public enum GameStatus
+        {
+            UNDEFINED,
+            RUNNING,
+            LOST,
+            WON
+        }
+
         public string Hint
         {
             get
@@ -27,9 +35,12 @@ namespace Introduction
 
         public int WrongGuesses { get { return wrongGuesses; } }
 
+        public GameStatus Status { get; private set; }
+
         public Hangman(string word)
         {
             this.word = word;
+            this.Status = GameStatus.RUNNING;
         }
 
         static void Main()
@@ -42,10 +53,18 @@ namespace Introduction
             if(word.Contains(guess))
             {
                 this.guesses += guess;
+                if(!this.Hint.Contains('_'))
+                {
+                    this.Status = GameStatus.WON;
+                }
             }
             else
             {
                 wrongGuesses++;
+                if(wrongGuesses == 11)
+                {
+                    this.Status = GameStatus.LOST;
+                }
             }
         }
     }
