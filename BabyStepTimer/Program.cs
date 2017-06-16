@@ -24,7 +24,7 @@ namespace BabyStepTimer
         private const long SecondsInCycle = 120;
 
         private static Form _mainForm;
-        private static WebBrowser _webBrowser;
+        public static WebBrowser _webBrowser;
         private static bool _timerRunning;
         private static DateTime _currentCycleStartTime;
         private static string _lastRemainingTime;
