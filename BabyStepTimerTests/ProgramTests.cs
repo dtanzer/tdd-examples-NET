@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace BabyStepTimer.Tests
 {
     [TestClass()]
+    [Ignore]
     public class ProgramTests
     {
         [TestMethod()]
