@@ -142,8 +142,11 @@ namespace BabyStepTimer
         {
             TimeSpan remainingTime = TimeSpan.FromSeconds(SecondsInCycle) - elapsedTime;
 
-            long remainingMinutes = (long)remainingTime.TotalSeconds / 60;
-            return remainingMinutes.ToString(TwoDigitsFormat) + ":" + (remainingTime.TotalSeconds - remainingMinutes * 60).ToString(TwoDigitsFormat);
+            long totalSeconds = (long) (remainingTime.TotalSeconds + 0.99);
+            long remainingMinutes = (long) totalSeconds / 60;
+            long remainingSeconds = (long) totalSeconds - remainingMinutes * 60;
+
+            return remainingMinutes.ToString(TwoDigitsFormat) + ":" + (remainingSeconds).ToString(TwoDigitsFormat);
         }
 
         private static string CreateTimerHtml(string timerText, string bodyColor, bool running)

@@ -27,6 +27,88 @@ namespace BabyStepTimer.Tests
             Assert.IsTrue(html.Contains("02:00"), "Expected html to contain 02:00 (was: "+html+").");
         }
 
+        [TestMethod()]
+        public void TimerStartsRunningAfterClickingStart()
+        {
+            string html = "";
+
+            act(() =>
+            {
+                click("start");
+                Thread.Sleep(1000);
+                html = getProgramHtml();
+            });
+
+            Assert.IsTrue(html.Contains("01:59"), "Expected html to contain 01:59 (was: " + html + ").");
+        }
+
+        [TestMethod()]
+        public void TimerShowsTwoMinutesAgainAfterStopping()
+        {
+            string html = "";
+
+            act(() =>
+            {
+                click("start");
+                Thread.Sleep(1000);
+                click("stop");
+                html = getProgramHtml();
+            });
+
+            Assert.IsTrue(html.Contains("02:00"), "Expected html to contain 02:00 (was: " + html + ").");
+        }
+
+        [TestMethod()]
+        public void TimerDoesNotRunAfterStopping()
+        {
+            string html = "";
+
+            act(() =>
+            {
+                click("start");
+                Thread.Sleep(1000);
+                click("stop");
+                Thread.Sleep(1000);
+                html = getProgramHtml();
+            });
+
+            Assert.IsTrue(html.Contains("02:00"), "Expected html to contain 02:00 (was: " + html + ").");
+        }
+
+        [TestMethod()]
+        public void TimerShowsTwoMinutesAgainAfterReset()
+        {
+            string html = "";
+
+            act(() =>
+            {
+                click("start");
+                Thread.Sleep(2000);
+                click("reset");
+                html = getProgramHtml();
+            });
+
+            Assert.IsTrue(html.Contains("02:00"), "Expected html to contain 02:00 (was: " + html + ").");
+        }
+
+        [TestMethod()]
+        public void TimerDoesRunAfterReset()
+        {
+            string html = "";
+
+            act(() =>
+            {
+                click("start");
+                Thread.Sleep(1000);
+                click("reset");
+                Thread.Sleep(1000);
+                html = getProgramHtml();
+            });
+
+            Assert.IsTrue(html.Contains("01:59"), "Expected html to contain 01:59 (was: " + html + ").");
+        }
+
+
         delegate void ActCommands();
         private void act(ActCommands commands)
         {
@@ -54,10 +136,13 @@ namespace BabyStepTimer.Tests
         private void click(string command)
         {
             var clickAction = new Action<string>(cmd => Program._webBrowser.Navigate($"command://{cmd}/"));
+
             if (Program._webBrowser.InvokeRequired)
                 Program._webBrowser.Invoke(clickAction, command);
             else
                 clickAction(command);
+
+            Thread.Sleep(10);
         }
     }
 }
