@@ -24,7 +24,7 @@ namespace BabyStepTimer
         private const long SecondsInCycle = 120;
 
         private static Form _mainForm;
-        private static WebBrowser _webBrowser;
+        public static WebBrowser WebBrowser;
         private static bool _timerRunning;
         private static DateTime _currentCycleStartTime;
         private static string _lastRemainingTime;
@@ -42,13 +42,13 @@ namespace BabyStepTimer
                 Size = new Size(250, 120)
             };
 
-            _webBrowser = new WebBrowser();
-            _webBrowser.ScrollBarsEnabled = false;
-            _webBrowser.DocumentText = CreateTimerHtml(getRemainingTimeCaption(TimeSpan.FromSeconds(0L)), BackgroundColorNeutral, false);
+            WebBrowser = new WebBrowser();
+            WebBrowser.ScrollBarsEnabled = false;
+            WebBrowser.DocumentText = CreateTimerHtml(getRemainingTimeCaption(TimeSpan.FromSeconds(0L)), BackgroundColorNeutral, false);
 
-            _webBrowser.Document.MouseDown += (sender, e) =>
+            WebBrowser.Document.MouseDown += (sender, e) =>
             {
-                var element = _webBrowser.Document.GetElementFromPoint(e.ClientMousePosition);
+                var element = WebBrowser.Document.GetElementFromPoint(e.ClientMousePosition);
                 if (element.TagName == "BODY" && e.MouseButtonsPressed == MouseButtons.Left)
                 {
                     ReleaseCapture();
@@ -56,13 +56,13 @@ namespace BabyStepTimer
                 }
             };
 
-            _webBrowser.Navigating += (sender, args) =>
+            WebBrowser.Navigating += (sender, args) =>
             {
                 if (args.Url.AbsoluteUri == "command://start/")
                 {
                     _mainForm.TopMost = true;
-                    _webBrowser.Document.OpenNew(false);
-                    _webBrowser.Document.Write(CreateTimerHtml(getRemainingTimeCaption(TimeSpan.FromMilliseconds(0)), BackgroundColorNeutral, true));
+                    WebBrowser.Document.OpenNew(false);
+                    WebBrowser.Document.Write(CreateTimerHtml(getRemainingTimeCaption(TimeSpan.FromMilliseconds(0)), BackgroundColorNeutral, true));
 
                     ThreadStart start = () =>
                     {
@@ -96,12 +96,12 @@ namespace BabyStepTimer
                                     _bodyBackgroundColor = BackgroundColorFailed;
                                 }
 
-                                if (_webBrowser.InvokeRequired)
+                                if (WebBrowser.InvokeRequired)
                                 {
-                                    _webBrowser.Invoke(new Action<string>(text =>
+                                    WebBrowser.Invoke(new Action<string>(text =>
                                     {
-                                        _webBrowser.Document.OpenNew(false);
-                                        _webBrowser.Document.Write(text);
+                                        WebBrowser.Document.OpenNew(false);
+                                        WebBrowser.Document.Write(text);
                                         _mainForm.Refresh();
                                     }), CreateTimerHtml(remainingTime, _bodyBackgroundColor, true));
                                 }
@@ -117,8 +117,8 @@ namespace BabyStepTimer
                 {
                     _timerRunning = false;
                     _mainForm.TopMost = false;
-                    _webBrowser.Document.OpenNew(false);
-                    _webBrowser.Document.Write(CreateTimerHtml(getRemainingTimeCaption(TimeSpan.FromSeconds(0)), BackgroundColorNeutral, false));
+                    WebBrowser.Document.OpenNew(false);
+                    WebBrowser.Document.Write(CreateTimerHtml(getRemainingTimeCaption(TimeSpan.FromSeconds(0)), BackgroundColorNeutral, false));
                     _mainForm.Refresh();
                 }
                 else if (args.Url.AbsoluteUri == "command://reset/")
@@ -133,17 +133,15 @@ namespace BabyStepTimer
                 args.Cancel = true;
             };
 
-            _mainForm.Controls.Add(_webBrowser);
+            _mainForm.Controls.Add(WebBrowser);
 
             Application.Run(_mainForm);
         }
 
         private static string getRemainingTimeCaption(TimeSpan elapsedTime)
         {
-            TimeSpan remainingTime = TimeSpan.FromSeconds(SecondsInCycle) - elapsedTime;
-
-            long remainingMinutes = (long)remainingTime.TotalSeconds / 60;
-            return remainingMinutes.ToString(TwoDigitsFormat) + ":" + (remainingTime.TotalSeconds - remainingMinutes * 60).ToString(TwoDigitsFormat);
+            TimeSpan remainingTime = TimeSpan.FromSeconds(SecondsInCycle) - TimeSpan.FromSeconds(Math.Floor(elapsedTime.TotalSeconds));
+            return remainingTime.ToString("mm':'ss");
         }
 
         private static string CreateTimerHtml(string timerText, string bodyColor, bool running)

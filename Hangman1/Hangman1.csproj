@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{00583383-00EF-41C0-865B-C07D387E43BD}</ProjectGuid>
+    <ProjectGuid>{6DB1BA9D-3DF9-4581-95A2-834A126CF12D}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>OutsideInTdd2</RootNamespace>
-    <AssemblyName>OutsideInTdd2</AssemblyName>
+    <RootNamespace>Hangman1</RootNamespace>
+    <AssemblyName>Hangman1</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,9 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DictionaryAnalyzer.cs" />
-    <Compile Include="DictionaryBot.cs" />
-    <Compile Include="Hangman.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

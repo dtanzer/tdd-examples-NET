@@ -12,10 +12,55 @@ namespace StartWithRuleSet.Tests
     public class HangmanTests
     {
         [TestMethod()]
-        [Ignore]
-        public void SomeTest()
+
+        public void ShowsUnderscoreWhenWordIsA()
         {
-            Assert.Fail();
+            Hangman hangman = new Hangman("a");
+            Assert.AreEqual("_", hangman.Output);
         }
+
+        [TestMethod()]
+        [Ignore]
+        public void GameWonWhenLastLetterGuessedOK()
+        {
+            Hangman hangman = new Hangman("a");
+            hangman.GuessInput('a');
+            Assert.IsTrue(hangman.IsSuccessful);
+        }
+
+        [TestMethod()]
+        public void ShowsTwoUnderscoreWhenWordIsNo()
+        {
+            Hangman hangman = new Hangman("no");
+            Assert.AreEqual("__", hangman.Output);
+        }
+
+        [TestMethod]
+        public void ShowGuessedCharacterInOutputString()
+        {
+            Hangman hangman = new Hangman("test");
+            hangman.GuessInput('t');
+
+            Assert.AreEqual("t__t", hangman.Output);
+        }
+
+        [TestMethod]
+        public void ShowSecretWhenAllGuessesAreCorrect()
+        {
+            Hangman hangman = new Hangman("test");
+            hangman.GuessInput('t');
+            hangman.GuessInput('e');
+            hangman.GuessInput('s');
+            Assert.AreEqual("test", hangman.Output);
+        }
+
+        [TestMethod]
+        public void IncreaseIncorrectGuessCountWhenGuessingIncorrectly()
+        {
+            Hangman hangman = new Hangman("foobar");
+            hangman.GuessInput('x');
+            Assert.AreEqual(1, hangman.IncorrectGuessCount);
+        }
+
     }
 }

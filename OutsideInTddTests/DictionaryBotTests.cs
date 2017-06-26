@@ -13,9 +13,13 @@ namespace OutsideInTdd.Tests
     {
         [TestMethod()]
         [Ignore]
-        public void SomeTest()
+        public void MakeGuess()
         {
-            Assert.Fail();
+            //DictionaryAnalizer da = new DictionaryAnalizer();
+            //Hangman hangman = new Hangman("hangman");
+            //DictionaryBot bot = new DictionaryBot(hangman, da);            
+            //bot.makeAGuess();
+            //Assert.AreEqual("_a___a_", hangman.Hint);
         }
     }
 }
