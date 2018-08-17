@@ -56,13 +56,17 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="DictionaryBotTests.cs" />
+    <Compile Include="HangmanControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Introduction\Introduction.csproj">
+      <Project>{9733DA3C-BDCD-410B-8316-B4EFA0FC2AF0}</Project>
+      <Name>Introduction</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OutsideInTdd\OutsideInTdd.csproj">
       <Project>{8926EE55-118D-4128-8507-7FB3CB845F48}</Project>
       <Name>OutsideInTdd</Name>

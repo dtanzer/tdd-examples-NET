@@ -42,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DictionaryBot.cs" />
+    <Compile Include="HangmanController.cs" />
+    <Compile Include="Interface1.cs" />
+    <Compile Include="Interface2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

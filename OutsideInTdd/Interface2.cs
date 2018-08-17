@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace OutsideInTdd
 {
-    public class DictionaryBot
+    public interface IHangman
     {
-        public static void Main(string[] args)
-        {
-        }
+         char?[] Hint { get; }
+
+
+
     }
 }

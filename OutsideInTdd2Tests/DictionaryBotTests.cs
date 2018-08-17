@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace OutsideInTdd2.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class DictionaryBotTests
     {
-        [TestMethod()]
+        [TestMethod]
         [Ignore]
         public void SomeTest()
         {
